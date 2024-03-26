@@ -1,0 +1,144 @@
+.headers-bg {
+    background-color: #67C0F7;
+}
+
+
+.headers-card {
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.headers-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 13px 40px -5px hsla(240, 30.1%, 28%, 0.12), 0 8px 32px -8px hsla(0, 0%, 0%, 0.14), 0 -6px 32px -6px hsla(0, 0%, 0%, 0.02);
+}
+
+.contact-card:hover {
+    background-color: #d5e8f6;
+    cursor: pointer;
+}
+
+/* Headers Background */
+.headers-bg {
+    background-color: #67C0F7;
+    padding: 50px;
+
+}
+
+/* Event Section */
+.event-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.event-text {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.event-description {
+    margin-top: 20px;
+    font-size: 18px;
+}
+
+.event-button {
+    margin-top: 30px;
+    font-size: 20px;
+}
+
+/* Content Section */
+.content-section {
+    background-color: #ffffff;
+    padding: 50px;
+    border-radius: 25px;
+    margin-top: 50px;
+}
+
+.content-title {
+    font-size: 28px;
+    font-weight: bold;
+    color: #00A8E3;
+    margin-bottom: 20px;
+}
+
+.content-subtitle {
+    font-size: 24px;
+    font-weight: bold;
+    color: #00A8E3;
+}
+
+.content-text {
+    font-size: 18px;
+}
+
+.content-list {
+    margin-top: 20px;
+}
+
+.content-list-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.content-list-item-icon {
+    color: #00A8E3;
+    margin-right: 10px;
+}
+
+.content-list-item-text {
+    font-size: 18px;
+}
+
+/* Contact Section */
+.contact-section {
+    background-color: #f0f0f0;
+    padding: 50px;
+    border-radius: 25px;
+    margin-top: 50px;
+}
+
+.contact-title {
+    font-size: 28px;
+    font-weight: bold;
+    color: #00A8E3;
+    margin-bottom: 20px;
+}
+
+.contact-text {
+    font-size: 18px;
+}
+
+.contact-address {
+    font-size: 18px;
+    margin-top: 20px;
+}
+
+/* Card Section */
+.headers-card {
+    background-color: #EFF8FE;
+    box-shadow: 0 2px 4px rgba(103, 192, 247, 0.8);
+    margin: 3px;
+    border: none;
+    border-radius: 25px;
+}
+
+.headers-card-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.card-icon {
+    color: #00A8E3;
+    margin-bottom: 10px;
+    font-size: 2rem;
+}
+
+.card-text {
+    font-size: 18px;
+    font-family: sans-serif;
+    text-align: center;
+}
