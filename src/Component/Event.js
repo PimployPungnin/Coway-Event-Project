@@ -8,7 +8,7 @@ function Event() {
     const [isHovered, setIsHovered] = useState(false);
     return (
         <div>
-            <div className='animate__animated animate__fadeInUp' style={{ backgroundColor: '#67C0F7', paddingBottom: '350px', paddingTop: '50px' }}>
+            <div className='animate__animated animate__fadeInUp' style={{ backgroundColor: '#67C0F7', paddingBottom: '350px', paddingTop: '50px', display: 'flex', justifyContent: 'center' }}>
                 <h1 style={{ textAlign: 'center', fontWeight: 'bold', fontSize: '30px', color: 'white', fontFamily: 'system-ui' }}>Event ประจำเดือนนี้!</h1>
             </div>
 
@@ -34,35 +34,35 @@ function Event() {
                 </Col>
             </Row>
 
-            <div style={{ marginTop: '30px' }}>
+            <div style={{ marginTop: '1em', marginBottom: '1em', display: 'flex', justifyContent: 'center' }}>
                 <Card style={{
-                    width: '1150px',
-                    height: '110px',
+                    width: '95%',
+                    maxWidth: '1000px',
                     backgroundColor: 'white',
                     boxShadow: '0 2px 4px rgba(0, 0, 0, 0.3)',
-                    margin: 'auto',
-                    borderRadius: '20px'
+                    margin: '5px',
+                    borderRadius: '15px'
                 }}>
                     <CardBody>
-                        <Row className='justify-content-between' style={{ margin: '20px', paddingLeft: '40px' }}>
-                            <Col style={{ marginLeft: '50px' }}>
-                                <FontAwesomeIcon icon={faCalendarAlt} size="2x" />
-                                <span style={{ marginLeft: '10px', fontSize: '19px', fontWeight: 'bold' }}>8 / มีนาคม / 2567</span>
+                        <Row className='justify-content-between' style={{ margin: '0.5em' }}>
+                            <Col style={{ textAlign: 'center', paddingTop: '18px' }}>
+                                <FontAwesomeIcon icon={faCalendarAlt} size="1.5em" />
+                                <span style={{ marginLeft: '0.5em', fontSize: '1em', fontWeight: 'bold' }}>8 / มีนาคม / 2567</span>
                             </Col>
                             <Col>
                                 <div style={{
-                                    borderLeft: '3px solid #dcdcdc',
-                                    height: '85px',
-                                    margin: '0 50px',
-                                    marginLeft: '-50px',
-                                    marginTop: '-24px',
+                                    borderLeft: '0.1em solid #dcdcdc',
+                                    height: '4em',
+                                    margin: '0 1em',
+                                    marginLeft: '0.5em',
+                                    marginTop: '-1em',
                                     filter: 'blur(0.5px)',
                                 }}>
                                 </div>
                             </Col>
-                            <Col style={{ marginLeft: '-300px' }}>
-                                <FontAwesomeIcon icon={faMapMarkerAlt} size="2x" />
-                                <span style={{ marginLeft: '10px', fontSize: '19px', fontWeight: 'bold' }}>โอเชี่ยนทาวเวอร์ 2 ชั้น</span>
+                            <Col style={{ textAlign: 'center', paddingTop: '18px' }}>
+                                <FontAwesomeIcon icon={faMapMarkerAlt} size="1.5em" />
+                                <span style={{ marginLeft: '0.5em', fontSize: '1em', fontWeight: 'bold' }}>โอเชี่ยนทาวเวอร์ 2 ชั้น</span>
                             </Col>
                         </Row>
                     </CardBody>
@@ -72,11 +72,11 @@ function Event() {
             <div style={{ marginTop: '60px', display: 'flex', justifyContent: 'center' }}>
                 <Card style={{ width: '100%', maxWidth: '1150px', backgroundColor: 'white', border: 'none' }}>
                     <CardBody>
-                        <Row style={{ paddingBottom: '45px' }}>
+                        <Row className='justify-content-between align-items-center' style={{paddingBottom:'50px'}}>
                             <Col md={8}>
-                                <Card.Title style={{ fontWeight: 'bold', fontSize: '20px', color: 'black', fontFamily: 'system-ui', paddingTop: '10px' }}>รายละเอียด</Card.Title>
+                                <Card.Title style={{ fontWeight: 'bold', fontSize: '20px', color: 'black', fontFamily: 'system-ui', paddingTop: '5px' }}>รายละเอียด</Card.Title>
                             </Col>
-                            <Col md={3} style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                            <Col md={3} className='d-flex align-items-center justify-content-end'>
                                 <Link to='/Register'>
                                     <Button href="/Register"
                                         style={{ borderRadius: '23px', backgroundColor: '#00A8E3', padding: '11px', fontFamily: 'Gill Sans', fontSize: '19px', fontWeight: 'bold', width: '10rem' }}
@@ -85,9 +85,9 @@ function Event() {
                                         ลงทะเบียน
                                     </Button>
                                 </Link>
-
                             </Col>
                         </Row>
+
                         <Card.Text>
                             <p style={{ textIndent: '60px', fontFamily: 'system-ui', fontSize: '16px' }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sodales ligula arcu, id hendrerit justo ultrices quis. Suspendisse consequat luctus eros at sodales. Aliquam hendrerit egestas ex volutpat rutrum. Vivamus luctus magna at sapien cursus bibendum. In augue elit, ornare ac interdum sed, pulvinar a tortor. Phasellus eget felis vestibulum, egestas nulla nec, luctus ante. Morbi efficitur massa ex, eget viverra turpis feugiat vitae. Etiam laoreet posuere iaculis. Vivamus sollicitudin est vitae ipsum eleifend tristique.</p>
                             <br />
@@ -108,7 +108,7 @@ function Event() {
                     <Row>
                         <Col className='text-center' style={{ paddingTop: '80px', paddingBottom: '80px' }}>
                             <iframe
-                                style={{ width: '1150px', height: "550px", borderRadius: '5px', boxShadow: '0 4px 5px rgba(0, 0, 0, 0.3)', border: 'none' }}
+                                style={{ width: '100%', maxWidth: '1150px', height: "550px", borderRadius: '5px', boxShadow: '0 4px 5px rgba(0, 0, 0, 0.3)', border: 'none' }}
                                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15502.391289926578!2d100.54413453955078!3d13.742782000000005!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30e29ee517282911%3A0xdc1408f1efe6ebae!2sCoway%20Thailand%20(Official)!5e0!3m2!1sen!2sth!4v1709799170834!5m2!1sen!2sth"
                             ></iframe>
                         </Col>

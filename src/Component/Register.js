@@ -41,7 +41,7 @@ function Register() {
 
 
     return (
-        <div className="register-page" style={{padding:'55px'}}>
+        <div className="register-page" style={{ padding: '55px' }}>
             <Container className='form-container animate__animated animate__zoomIn' style={{ maxWidth: '700px', paddingTop: '45px' }}>
                 <div className="toggle-container">
                     <input type="checkbox" id="toggle" className="hidden" />

@@ -1,9 +1,10 @@
-.register-page{
+.register-page {
     background-image: url('bluewater.jpg');
     background-attachment: fixed;
     background-size: cover;
     background-position: center;
 }
+
 .form-container {
     background-color: white;
     display: flex;
@@ -13,6 +14,8 @@
     padding: 30px;
     border-radius: 50px;
     box-shadow: #67C0F7 0 2px 10px 0px;
+    width: 100%;
+    overflow: hidden;
 }
 
 .toggle-container {
@@ -60,11 +63,6 @@
     display: none;
 }
 
-.form-container {
-    width: 100%;
-    overflow: hidden;
-}
-
 .form-control:hover {
     transform: scale(1.03);
     transition: transform 0.2s ease-in-out;
@@ -78,26 +76,22 @@
 .form-label {
     font-size: 13px;
     color: #808080;
-    ;
 }
 
-.form-control {
-
+.form-control,
+.form-select {
     color: black;
     border: none;
     padding: 11px !important;
     border-radius: 12px;
-    box-shadow: 0 3px 5px rgba(103, 192, 247, 0.6);
     width: 100%;
     transition: box-shadow 0.3s ease-in-out;
+}
 
+.form-control {
+    box-shadow: 0 3px 5px rgba(103, 192, 247, 0.6);
 }
 
 .form-select {
-    color: #808080;
-    border: none;
-    padding: 10px !important;
-    border-radius: 12px;
     box-shadow: 0 3px 8px rgba(103, 192, 247, 0.6);
-    width: 100%;
 }

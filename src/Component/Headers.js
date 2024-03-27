@@ -21,13 +21,15 @@ function Headers() {
 
     return (
         <div>
-            <div className='p-5 text-center headers-bg animate__animated animate__fadeInUp'>
-                <Row className="mt-5 mt-md-0">
-                    <Col md={5} className='text-center' style={{ padding: '50px' }}>
+            <div className='p-3 p-md-5 text-center headers-bg animate__animated animate__fadeInUp'>
+                <Row className="align-items-center">
+                    <Col xs={12} md={6} className='text-center mb-3 mb-md-0'>
+                        <img src="/hp.jpg" alt="HPImage" style={{ borderRadius: '25px', width: 'auto', height: 'auto', maxWidth: '380px', boxShadow: '0 5px 6px rgba(0, 157, 220, 0.5)' }} />
+                    </Col>
+
+                    <Col xs={12} md={6} className='text-center mb-3 mb-md-0'>
                         <h2 style={{ fontWeight: 'bold', fontSize: '28px', color: 'black', fontFamily: 'system-ui' }}>Event ประจำเดือนนี้!</h2>
-                        <p style={{ fontWeight: 'bold', fontFamily: 'system-ui', paddingTop: '20px', paddingBottom: '20px' }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam id luctus justo.
-                            Curabitur elit orci, feugiat eu gravida non, ultrices ut metus. Pellentesque vehicula, tellus a ultricies pretium, felis lectus feugiat nibh, id interdum ex urna non tortor.
-                            Cras eleifend lorem ac libero finibus, vel efficitur orci ornare.</p>
+                        <p style={{ fontWeight: 'bold', fontFamily: 'system-ui', paddingTop: '20px', paddingBottom: '20px' }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam id luctus justo. Curabitur elit orci, feugiat eu gravida non, ultrices ut metus. Pellentesque vehicula, tellus a ultricies pretium, felis lectus feugiat nibh, id interdum ex urna non tortor. Cras eleifend lorem ac libero finibus, vel efficitur orci ornare.</p>
                         <Link to="/event">
                             <Button href="/.Event"
                                 style={buttonStyle}
@@ -36,10 +38,6 @@ function Headers() {
                                 รายละเอียดเพิ่มเติม
                             </Button>
                         </Link>
-                    </Col>
-
-                    <Col md={6} className='text-center mt-4 mt-md-0 ml-auto'>
-                        <img src="/hp.jpg" alt="HPImage" style={{ borderRadius: '25px', width: 'auto', height: 'auto', maxWidth: '380px', boxShadow: '0 5px 6px rgba(0, 157, 220, 0.5)' }} />
                     </Col>
                 </Row>
             </div>
@@ -129,10 +127,8 @@ function Headers() {
                         </Col>
 
                         <Col md={6}>
-                            <div className='bg-image text-center text-md-right mt-4 mt-md-0 ml-auto'>
-                                <Col>
-                                    <img src='https://i.pinimg.com/originals/5c/5e/25/5c5e25cdfadb5df4d1da631b7f50088d.jpg' alt="BTSImage" style={{ borderRadius: '10px', maxWidth: '355px', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.5)' }} />
-                                </Col>
+                            <div className='bg-image text-center text-md-right mt-4 mt-md-0 ml-auto' >
+                                <img src='https://i.pinimg.com/originals/5c/5e/25/5c5e25cdfadb5df4d1da631b7f50088d.jpg' alt="BTSImage" style={{ borderRadius: '10px', maxWidth: '355px', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.5)' }} />
                             </div>
                         </Col>
 
@@ -155,7 +151,7 @@ function Headers() {
                                         <h2 style={{ fontWeight: 'bold', fontFamily: 'system ui' }}>ข้อมูลเพิ่มเติม</h2>
                                     </Col>
                                 </Row>
-                                <Row className="mt-3" >
+                                <Row className="mt-3">
                                     <Col md={10}>
                                         <span style={{ color: '#00A8E3', fontWeight: 'bold', fontFamily: 'system ui' }}>
                                             <p style={{ marginBottom: '0' }}>กรุงเทพมหานคร (สำนักงานใหญ่)</p>
@@ -173,9 +169,9 @@ function Headers() {
 
                         {/* Contact ส่วน Card */}
                         <Col md={7} className='text-center' >
-                            <div className="d-flex flex-wrap justify-content-around ">
-                                <Card className='headers-card' style={{ width: '165px', height: '200px', backgroundColor: '#EFF8FE', boxShadow: '0 2px 4px rgba(103, 192, 247, 0.8)', margin: '3px', border: 'none', borderRadius: '25px' }}>
-                                    <Card.Body style={{ marginTop: '50px' }}>
+                            <div className="d-flex flex-wrap justify-content-around align-items-stretch">
+                                <Card className='headers-card' style={{ width: '165px', backgroundColor: '#EFF8FE', boxShadow: '0 2px 4px rgba(103, 192, 247, 0.8)', margin: '3px', border: 'none', borderRadius: '25px' }}>
+                                    <Card.Body style={{ paddingTop: '50px', paddingBottom: '50px' }}>
                                         <Card.Title style={{ textAlign: 'center' }}>
                                             <FontAwesomeIcon icon={faPhone} size='2x' />
                                         </Card.Title>
@@ -185,10 +181,10 @@ function Headers() {
                                     </Card.Body>
                                 </Card>
 
-                                <Card className='headers-card' style={{ width: '165px', height: '200px', backgroundColor: '#EFF8FE', boxShadow: '0 2px 4px rgba(103, 192, 247, 0.8)', margin: '3px', border: 'none', borderRadius: '25px' }}>
-                                    <Card.Body style={{ marginTop: '50px' }}>
-                                        <Card.Title style={{ textAlign: 'center' }}
-                                        ><FontAwesomeIcon icon={faLine} size='2x' />
+                                <Card className='headers-card' style={{ width: '165px', backgroundColor: '#EFF8FE', boxShadow: '0 2px 4px rgba(103, 192, 247, 0.8)', margin: '3px', border: 'none', borderRadius: '25px' }}>
+                                    <Card.Body style={{ paddingTop: '50px', paddingBottom: '50px' }}>
+                                        <Card.Title style={{ textAlign: 'center' }}>
+                                            <FontAwesomeIcon icon={faLine} size='2x' />
                                         </Card.Title>
                                         <Card.Text style={{ padding: '10px', fontFamily: 'sans-serif' }}>
                                             xxxx-xxx
@@ -196,8 +192,8 @@ function Headers() {
                                     </Card.Body>
                                 </Card>
 
-                                <Card className='headers-card' style={{ width: '165px', height: '200px', backgroundColor: '#EFF8FE', boxShadow: '0 2px 4px rgba(103, 192, 247, 0.8)', margin: '3px', border: 'none', borderRadius: '25px' }}>
-                                    <Card.Body style={{ marginTop: '50px' }}>
+                                <Card className='headers-card' style={{ width: '165px', backgroundColor: '#EFF8FE', boxShadow: '0 2px 4px rgba(103, 192, 247, 0.8)', margin: '3px', border: 'none', borderRadius: '25px' }}>
+                                    <Card.Body style={{ paddingTop: '50px', paddingBottom: '50px' }}>
                                         <Card.Title style={{ textAlign: 'center' }}>
                                             <FontAwesomeIcon icon={faFacebook} size='2x' />
                                         </Card.Title>
