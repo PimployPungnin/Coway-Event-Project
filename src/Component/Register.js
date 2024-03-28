@@ -39,6 +39,17 @@ function Register() {
         setValidated(true);
     };
 
+    const buttonStyle = {
+        width: '160px',
+        borderRadius: '30px',
+        border: 'none',
+        backgroundColor: '#00A8E3',
+        fontFamily: 'Segoe UI',
+        padding: '12px',
+        fontSize: '20px',
+        fontWeight: 'bold'
+    };
+
 
     return (
         <div className="register-page" style={{ padding: '55px' }}>
@@ -101,7 +112,7 @@ function Register() {
                             </Form.Group>
                         </Row>
 
-                        <Row className="mb-3" style={{ paddingLeft: '26px', paddingRight: '26px' }}>
+                        <Row className="mb-3" style={{ paddingLeft: '14px', paddingRight: '14px' }}>
                             <Form.Group as={Col} controlId="validationCustomNumber">
                                 <Form.Label>หมายเลขตัวแทน*</Form.Label>
                                 <Form.Control
@@ -130,7 +141,7 @@ function Register() {
                             </Form.Group>
                         </Row>
 
-                        <Row className='mb-3' style={{ paddingLeft: '26px', paddingRight: '26px' }}>
+                        <Row className='mb-3' style={{ paddingLeft: '14px', paddingRight: '14px' }}>
                             <Form.Group as={Col} controlId="validationCustomGender" >
                                 <Form.Label>เพศ*</Form.Label>
                                 <Form.Select className='select' name="gender" value={formData.gender} onChange={handleChange} required >
@@ -241,7 +252,7 @@ function Register() {
 
                         <div className='text-center' style={{ margin: '10px' }}>
                             <Button type='submit'
-                                style={{ borderRadius: '20px', backgroundColor: '#00A8E3', padding: '10px', fontFamily: 'Gill Sans', fontSize: '18px', fontWeight: 'bold', width: '128px' }}
+                                style={buttonStyle}
                                 onMouseOver={(e) => e.target.style.backgroundColor = 'black'}
                                 onMouseOut={(e) => e.target.style.backgroundColor = '#00A8E3'}>
                                 ลงทะเบียน
@@ -297,7 +308,7 @@ function Register() {
                             </Form.Group>
                         </Row>
 
-                        <Row className='mb-3' style={{ paddingLeft: '26px', paddingRight: '26px' }}>
+                        <Row className='mb-3' style={{ paddingLeft: '14px', paddingRight: '14px' }}>
                             <Form.Group as={Col} controlId="validationCustomGender" >
                                 <Form.Label>เพศ*</Form.Label>
                                 <Form.Select className='select' name="gender" value={formData.gender} onChange={handleChange} required >
@@ -408,7 +419,7 @@ function Register() {
 
                         <div className='text-center' style={{ margin: '10px' }}>
                             <Button type='submit'
-                                style={{ borderRadius: '20px', backgroundColor: '#00A8E3', padding: '10px', fontFamily: 'Gill Sans', fontSize: '18px', fontWeight: 'bold', width: '128px' }}
+                                style={buttonStyle}
                                 onMouseOver={(e) => e.target.style.backgroundColor = 'black'}
                                 onMouseOut={(e) => e.target.style.backgroundColor = '#00A8E3'}>
                                 ลงทะเบียน

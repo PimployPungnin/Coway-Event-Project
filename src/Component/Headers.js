@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { Container, Row, Col, Card, Button } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPhone } from '@fortawesome/free-solid-svg-icons'
+import { faHeadset } from '@fortawesome/free-solid-svg-icons'
 import { faLine, faFacebook } from '@fortawesome/free-brands-svg-icons'
 import { faCircle } from '@fortawesome/free-solid-svg-icons'
 import './Styles.css'
@@ -11,11 +11,13 @@ import 'animate.css'
 function Headers() {
 
     const buttonStyle = {
-        borderRadius: '20px',
+        width:'220px',
+        borderRadius: '30px',
+        border: 'none',
         backgroundColor: '#00A8E3',
-        padding: '11px',
-        fontFamily: 'Gill Sans',
-        fontSize: '18px',
+        fontFamily: 'Segoe UI',
+        padding: '12px',
+        fontSize: '20px',
         fontWeight: 'bold'
     };
 
@@ -23,13 +25,13 @@ function Headers() {
         <div>
             <div className='p-3 p-md-5 text-center headers-bg animate__animated animate__fadeInUp'>
                 <Row className="align-items-center">
-                    <Col xs={12} md={6} className='text-center mb-3 mb-md-0'>
+                    <Col xs={12} md={6} className='text-center mb-3 mb-md-0 animate__animated animate__fadeInLeft'>
                         <img src="/hp.jpg" alt="HPImage" style={{ borderRadius: '25px', width: 'auto', height: 'auto', maxWidth: '380px', boxShadow: '0 5px 6px rgba(0, 157, 220, 0.5)' }} />
                     </Col>
 
-                    <Col xs={12} md={6} className='text-center mb-3 mb-md-0'>
+                    <Col xs={12} md={4} className='text-center mb-3 mb-md-0 animate__animated animate__fadeInRight'>
                         <h2 style={{ fontWeight: 'bold', fontSize: '28px', color: 'black', fontFamily: 'system-ui' }}>Event ประจำเดือนนี้!</h2>
-                        <p style={{ fontWeight: 'bold', fontFamily: 'system-ui', paddingTop: '20px', paddingBottom: '20px' }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam id luctus justo. Curabitur elit orci, feugiat eu gravida non, ultrices ut metus. Pellentesque vehicula, tellus a ultricies pretium, felis lectus feugiat nibh, id interdum ex urna non tortor. Cras eleifend lorem ac libero finibus, vel efficitur orci ornare.</p>
+                        <p style={{ fontFamily: 'system-ui', paddingTop: '20px', paddingBottom: '20px', color:'black' }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam id luctus justo. Curabitur elit orci, feugiat eu gravida non, ultrices ut metus. Pellentesque vehicula, tellus a ultricies pretium, felis lectus feugiat nibh, id interdum ex urna non tortor. Cras eleifend lorem ac libero finibus, vel efficitur orci ornare.</p>
                         <Link to="/event">
                             <Button href="/.Event"
                                 style={buttonStyle}
@@ -170,38 +172,46 @@ function Headers() {
                         {/* Contact ส่วน Card */}
                         <Col md={7} className='text-center' >
                             <div className="d-flex flex-wrap justify-content-around align-items-stretch">
-                                <Card className='headers-card' style={{ width: '165px', backgroundColor: '#EFF8FE', boxShadow: '0 2px 4px rgba(103, 192, 247, 0.8)', margin: '3px', border: 'none', borderRadius: '25px' }}>
-                                    <Card.Body style={{ paddingTop: '50px', paddingBottom: '50px' }}>
-                                        <Card.Title style={{ textAlign: 'center' }}>
-                                            <FontAwesomeIcon icon={faPhone} size='2x' />
-                                        </Card.Title>
-                                        <Card.Text style={{ paddingTop: '10px', fontFamily: 'sans-serif' }}>
-                                            xx-xxx-xxxx
-                                        </Card.Text>
-                                    </Card.Body>
-                                </Card>
+                                <Link to={'tel:1412'} style={{ textDecoration: 'none', color: 'black' }}>
+                                    <Card className='headers-card'>
+                                        <Card.Body style={{ paddingTop: '50px', paddingBottom: '50px' }}>
+                                            <Card.Title style={{ textAlign: 'center' }}>
+                                                <FontAwesomeIcon icon={faHeadset} size='2x' />
+                                            </Card.Title>
+                                            <Card.Text style={{ paddingTop: '10px', fontFamily: 'sans-serif', fontSize: '16px' }}>
+                                                1412
+                                            </Card.Text>
+                                        </Card.Body>
+                                    </Card>
+                                </Link>
 
-                                <Card className='headers-card' style={{ width: '165px', backgroundColor: '#EFF8FE', boxShadow: '0 2px 4px rgba(103, 192, 247, 0.8)', margin: '3px', border: 'none', borderRadius: '25px' }}>
-                                    <Card.Body style={{ paddingTop: '50px', paddingBottom: '50px' }}>
-                                        <Card.Title style={{ textAlign: 'center' }}>
-                                            <FontAwesomeIcon icon={faLine} size='2x' />
-                                        </Card.Title>
-                                        <Card.Text style={{ padding: '10px', fontFamily: 'sans-serif' }}>
-                                            xxxx-xxx
-                                        </Card.Text>
-                                    </Card.Body>
-                                </Card>
+                                <Link to={'https://page.line.me/coway-connect?openQrModal=true'} target="_blank" style={{ textDecoration: 'none', color: 'black' }}>
+                                    <Card className='headers-card'>
+                                        <Card.Body style={{ paddingTop: '50px', paddingBottom: '50px' }}>
+                                            <Card.Title style={{ textAlign: 'center' }}>
+                                                <FontAwesomeIcon icon={faLine} size='2x' />
+                                            </Card.Title>
+                                            <Card.Text style={{ padding: '10px', fontFamily: 'sans-serif', fontSize: '16px' }}>
+                                                LINE Official Account
+                                            </Card.Text>
+                                        </Card.Body>
+                                    </Card>
+                                </Link>
 
-                                <Card className='headers-card' style={{ width: '165px', backgroundColor: '#EFF8FE', boxShadow: '0 2px 4px rgba(103, 192, 247, 0.8)', margin: '3px', border: 'none', borderRadius: '25px' }}>
-                                    <Card.Body style={{ paddingTop: '50px', paddingBottom: '50px' }}>
-                                        <Card.Title style={{ textAlign: 'center' }}>
-                                            <FontAwesomeIcon icon={faFacebook} size='2x' />
-                                        </Card.Title>
-                                        <Card.Text style={{ padding: '10px', fontFamily: 'sans-serif' }}>
-                                            Coway Thailand
-                                        </Card.Text>
-                                    </Card.Body>
-                                </Card>
+
+                                <Link to={'https://www.facebook.com/CowayThailandOfficial'} target="_blank" style={{ textDecoration: 'none', color: 'black' }}>
+                                    <Card className='headers-card' >
+                                        <Card.Body style={{ paddingTop: '50px', paddingBottom: '50px' }}>
+                                            <Card.Title style={{ textAlign: 'center' }}>
+                                                <FontAwesomeIcon icon={faFacebook} size='2x' />
+                                            </Card.Title>
+                                            <Card.Text style={{ padding: '10px', fontFamily: 'sans-serif', fontSize: '16px' }}>
+                                                Coway Thailand
+                                            </Card.Text>
+                                        </Card.Body>
+                                    </Card>
+                                </Link>
+
                             </div>
                         </Col>
                     </Row>

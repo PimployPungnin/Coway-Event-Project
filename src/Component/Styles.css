@@ -1,21 +1,15 @@
-/* CSS code for responsive design */
+@media (max-width: 576px) {
+    .animate__animated {
+        animation-duration: 0.5s;
+    }
 
-/* สำหรับหน้าจอขนาดเล็ก (โทรศัพท์) */
-@media only screen and (max-width: 600px) {
-    /* เขียน CSS ที่ต้องการปรับเปลี่ยนสำหรับโทรศัพท์ที่มีความกว้างไม่เกิน 600px ตรงนี้ */
-    /* เช่น การปรับขนาดและการจัดวางของเนื้อหาให้เหมาะสมกับอุปกรณ์โทรศัพท์ */
-}
+    h1 {
+        font-size: 28px;
+    }
 
-/* สำหรับหน้าจอขนาดกลาง (แท็บเล็ต) */
-@media only screen and (min-width: 601px) and (max-width: 1024px) {
-    /* เขียน CSS ที่ต้องการปรับเปลี่ยนสำหรับแท็บเล็ตที่มีความกว้างระหว่าง 601px ถึง 1024px ตรงนี้ */
-    /* เช่น การปรับขนาดและการจัดวางของเนื้อหาให้เหมาะสมกับอุปกรณ์แท็บเล็ต */
-}
-
-/* สำหรับหน้าจอขนาดใหญ่ (คอมพิวเตอร์) */
-@media only screen and (min-width: 1025px) {
-    /* เขียน CSS ที่ต้องการปรับเปลี่ยนสำหรับคอมพิวเตอร์ที่มีความกว้างมากกว่า 1024px ตรงนี้ */
-    /* เช่น การปรับขนาดและการจัดวางของเนื้อหาให้เหมาะสมกับอุปกรณ์คอมพิวเตอร์ */
+    p {
+        font-size: 16px;
+    }
 }
 
 .headers-bg {
@@ -24,6 +18,12 @@
 
 
 .headers-card {
+    width: 160px !important;
+    height: 180px !important;
+    background-Color: #EFF8FE !important;
+    margin: 3px !important;
+    border: none !important;
+    border-radius: 25px !important;
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
@@ -42,6 +42,10 @@
     background-color: #67C0F7;
     padding: 50px;
 
+}
+
+.buttonstyle{
+    border-radius: 80px ;
 }
 
 /* Event Section */
