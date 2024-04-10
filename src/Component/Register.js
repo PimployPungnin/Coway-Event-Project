@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
-import { Form, Button, Row, Col, ToggleButton, ToggleButtonGroup, Container } from 'react-bootstrap'
-import { Link, useNavigate } from 'react-router-dom'
+import { Form, Button, Row, Col, Container } from 'react-bootstrap'
+import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
 import './Form.css'
 import 'animate.css';
 
@@ -27,18 +28,22 @@ function Register() {
         setFormData({ ...formData, [name]: value });
     };
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         const form = event.currentTarget;
         if (form.checkValidity() === false) {
             event.preventDefault();
             event.stopPropagation();
         } else {
-            navigate('/success');
+            try {
+                const response = await axios.post('mongodb://localhost:27017', formData);
+                console.log(response.data);
+                navigate('/success');
+            } catch (error) {
+                console.error('Error:', error);
+            }
         }
-
         setValidated(true);
     };
-
     const buttonStyle = {
         width: '160px',
         borderRadius: '30px',
@@ -64,7 +69,7 @@ function Register() {
                 </div>
 
                 {showSignupForm ? (
-                    <Form noValidate validated={validated} onSubmit={handleSubmit} className='form-input d-flex flex-column justify-content-center animate__animated animate__zoomIn' >
+                    <Form noValidate validated={validated} onSubmit={handleSubmit} method='get' className='form-input d-flex flex-column justify-content-center animate__animated animate__zoomIn' >
                         <Row className='mb-3'>
                             <Form.Group as={Col} md='11' controlId="validationCustomName" className="mt-3 mb-3 mx-auto" >
                                 <Form.Label>ชื่อ-นามสกุล*</Form.Label>
