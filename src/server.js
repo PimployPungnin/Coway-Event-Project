@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const registerRoute = require('./registerRoute');
 
 const app = express();
-const PORT = 27017;
+const PORT = 5000;
 
 // เชื่อมต่อ MongoDB
 mongoose.connect('mongodb://localhost:27017/registrationDB', { useNewUrlParser: true, useUnifiedTopology: true });
@@ -22,5 +22,5 @@ app.use(bodyParser.json());
 app.use('/', registerRoute);
 
 app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+    console.log(`Express server is running on port ${PORT}`);
 });

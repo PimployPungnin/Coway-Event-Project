@@ -7,7 +7,6 @@ import 'animate.css';
 
 function Register() {
     const [showSignupForm, setShowSignupForm] = useState(true);
-
     const navigate = useNavigate();
     const [validated, setValidated] = useState(false);
     const [formData, setFormData] = useState({
