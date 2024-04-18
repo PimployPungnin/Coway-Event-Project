@@ -1,27 +1,4 @@
 
-@media (max-width: 576px) {
-    .form-container {
-        width: 90%; /* ปรับความกว้างของ container เพื่อให้พอดีกับหน้าจอโทรศัพท์ */
-        padding: 10px; /* ลด padding */
-    }
-
-    .toggle {
-        width: 90%; /* ปรับความกว้างของ toggle */
-    }
-
-    .toggle .slide {
-        width: 50%; /* ปรับความกว้างของ slide */
-    }
-
-    .label {
-        width: 50%; /* ปรับความกว้างของ label */
-    }
-
-    .form-input {
-        width: 90%; /* ปรับความกว้างของ form input */
-    }
-}
-
 .register-page {
     background-image: url('bluewater.jpg');
     background-attachment: fixed;

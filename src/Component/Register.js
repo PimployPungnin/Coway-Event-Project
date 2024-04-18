@@ -1,48 +1,48 @@
 import React, { useState } from 'react'
 import { Form, Button, Row, Col, Container } from 'react-bootstrap'
+import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
 import './Form.css'
-import 'animate.css';
+import 'animate.css'
 
 function Register() {
+    const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const [showSignupForm, setShowSignupForm] = useState(true);
+    const { createTransport } = require('nodemailer');
     const navigate = useNavigate();
-    const [validated, setValidated] = useState(false);
-    const [formData, setFormData] = useState({
-        fullName: '',
-        email: '',
-        phoneNumber: '',
-        agentNumber: '',
-        affiliation: '',
-        gender: '',
-        city: ''
-    });
 
     const toggleForm = () => {
         setShowSignupForm(!showSignupForm);
     };
-    const handleChange = (event) => {
-        const { name, value } = event.target;
-        setFormData({ ...formData, [name]: value });
+
+    const onSubmit = async (data) => {
+        console.log(data);
+        reset();
+        // Send email
+        const transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: 'pimployforwork@gmail.com',
+                pass: 'tangmo2545'
+            }
+        });
+
+        const mailOptions = {
+            from: 'pimployforwork@gmail.com',
+            to: data.email, // ใช้อีเมลที่ผู้ใช้กรอกข้อมูลไว้
+            subject: 'Subject of your email',
+            text: 'Body of your email'
+        };
+
+        try {
+            await transporter.sendMail(mailOptions);
+            console.log('Email sent successfully');
+        } catch (error) {
+            console.error('Error sending email:', error);
+        }
+        navigate('/success');
     };
 
-    const handleSubmit = async (event) => {
-        const form = event.currentTarget;
-        if (form.checkValidity() === false) {
-            event.preventDefault();
-            event.stopPropagation();
-        } else {
-            try {
-                const response = await axios.post('mongodb://localhost:27017', formData);
-                console.log(response.data);
-                navigate('/success');
-            } catch (error) {
-                console.error('Error:', error);
-            }
-        }
-        setValidated(true);
-    };
     const buttonStyle = {
         width: '160px',
         borderRadius: '30px',
@@ -53,7 +53,6 @@ function Register() {
         fontSize: '20px',
         fontWeight: 'bold'
     };
-
 
     return (
         <div className="register-page" style={{ padding: '55px' }}>
@@ -68,7 +67,7 @@ function Register() {
                 </div>
 
                 {showSignupForm ? (
-                    <Form noValidate validated={validated} onSubmit={handleSubmit} method='get' className='form-input d-flex flex-column justify-content-center animate__animated animate__zoomIn' >
+                    <Form onSubmit={handleSubmit(onSubmit)} className='form-input d-flex flex-column justify-content-center animate__animated animate__zoomIn'>
                         <Row className='mb-3'>
                             <Form.Group as={Col} md='11' controlId="validationCustomName" className="mt-3 mb-3 mx-auto" >
                                 <Form.Label>ชื่อ-นามสกุล*</Form.Label>
@@ -76,13 +75,10 @@ function Register() {
                                     required
                                     type="text"
                                     name="fullName"
-                                    value={formData.fullName}
-                                    onChange={handleChange}
                                     placeholder="กรุณากรอกชื่อ-นามสกุล"
+                                    {...register("fullName")}
                                 />
-                                <Form.Control.Feedback type="invalid" >
-                                    *กรุณากรอกชื่อ-นามสกุล
-                                </Form.Control.Feedback>
+                                {errors.fullName && <Form.Control.Feedback type="invalid">*กรุณากรอกชื่อ-นามสกุล</Form.Control.Feedback>}
                             </Form.Group>
 
                             <Form.Group as={Col} md='11' controlId="validationCustomEmail" className="mt-3 mb-3 mx-auto">
@@ -91,13 +87,10 @@ function Register() {
                                     required
                                     type="email"
                                     name="email"
-                                    value={formData.email}
-                                    onChange={handleChange}
                                     placeholder="กรุณากรอกอีเมล"
+                                    {...register("email")}
                                 />
-                                <Form.Control.Feedback type="invalid">
-                                    *กรุณากรอกอีเมล
-                                </Form.Control.Feedback>
+                                {errors.email && <Form.Control.Feedback type="invalid">*กรุณากรอกอีเมล</Form.Control.Feedback>}
                             </Form.Group>
 
                             <Form.Group as={Col} md='11' controlId="validationCustomPhone" className="mt-3 mb-3 mx-auto">
@@ -106,29 +99,25 @@ function Register() {
                                     required
                                     type="text"
                                     name="phoneNumber"
-                                    value={formData.phoneNumber}
-                                    onChange={handleChange}
                                     placeholder="กรุณากรอกเบอร์โทรศัพท์"
+                                    minLength={10}
+                                    {...register("phoneNumber")}
                                 />
-                                <Form.Control.Feedback type="invalid">
-                                    *กรุณากรอกหมายเลขโทรศัพท์
-                                </Form.Control.Feedback>
+                                {errors.phoneNumber && <Form.Control.Feedback type="invalid">*กรุณากรอกหมายเลขโทรศัพท์</Form.Control.Feedback>}
                             </Form.Group>
                         </Row>
 
-                        <Row className="mb-3" style={{ paddingLeft: '14px', paddingRight: '14px' }}>
+                        <Row className="mb-3" style={{ paddingLeft: '23px', paddingRight: '23px' }}>
                             <Form.Group as={Col} controlId="validationCustomNumber">
                                 <Form.Label>หมายเลขตัวแทน*</Form.Label>
                                 <Form.Control
                                     required
                                     type="text"
                                     name="agentNumber"
-                                    value={formData.agentNumber}
-                                    onChange={handleChange}
-                                    placeholder="กรุณากรอกหมายเลขตัวแทน" />
-                                <Form.Control.Feedback type="invalid">
-                                    *กรุณากรอกหมายเลขตัวแทน
-                                </Form.Control.Feedback>
+                                    placeholder="กรุณากรอกหมายเลขตัวแทน"
+                                    {...register("agentNumber")}
+                                />
+                                {errors.agentNumber && <Form.Control.Feedback type="invalid">*กรุณากรอกหมายเลขตัวแทน</Form.Control.Feedback>}
                             </Form.Group>
                             <Form.Group as={Col} controlId="validationCustomAffiliation">
                                 <Form.Label>สังกัด*</Form.Label>
@@ -136,31 +125,27 @@ function Register() {
                                     required
                                     type="text"
                                     name="affiliation"
-                                    value={formData.affiliation}
-                                    onChange={handleChange}
-                                    placeholder="กรุณากรอกสังกัด" />
-                                <Form.Control.Feedback type="invalid">
-                                    *กรุณากรอกสังกัด
-                                </Form.Control.Feedback>
+                                    placeholder="กรุณากรอกสังกัด"
+                                    {...register("affiliation")}
+                                />
+                                {errors.affiliation && <Form.Control.Feedback type="invalid">*กรุณากรอกสังกัด</Form.Control.Feedback>}
                             </Form.Group>
                         </Row>
 
-                        <Row className='mb-3' style={{ paddingLeft: '14px', paddingRight: '14px' }}>
+                        <Row className='mb-3' style={{ paddingLeft: '23px', paddingRight: '23px' }}>
                             <Form.Group as={Col} controlId="validationCustomGender" >
                                 <Form.Label>เพศ*</Form.Label>
-                                <Form.Select className='select' name="gender" value={formData.gender} onChange={handleChange} required >
+                                <Form.Select className='select' name="gender" required {...register("gender")}>
                                     <option value="">กรุณาเลือกเพศ</option>
                                     <option value="female">หญิง</option>
                                     <option value="male">ชาย</option>
                                 </Form.Select>
-                                <Form.Control.Feedback type="invalid">
-                                    *กรุณาเลือกเพศ
-                                </Form.Control.Feedback>
+                                {errors.gender && <Form.Control.Feedback type="invalid">*กรุณาเลือกเพศ</Form.Control.Feedback>}
                             </Form.Group>
 
                             <Form.Group as={Col} controlId="validationCustomCity">
                                 <Form.Label>จังหวัด*</Form.Label>
-                                <Form.Select className='select' name="city" value={formData.city} onChange={handleChange} required>
+                                <Form.Select className='select' name="city" required {...register("city")}>
                                     <option value="">กรุณาเลือกจังหวัด</option>
                                     <option value="กระบี่">กระบี่</option>
                                     <option value="กรุงเทพฯ">กรุงเทพมหานคร</option>
@@ -239,9 +224,7 @@ function Register() {
                                     <option value="อุทัยธานี">อุทัยธานี</option>
                                     <option value="อุบลราชธานี">อุบลราชธานี</option>
                                 </Form.Select>
-                                <Form.Control.Feedback type="invalid">
-                                    *กรุณาเลือกจังหวัด
-                                </Form.Control.Feedback>
+                                {errors.city && <Form.Control.Feedback type="invalid">*กรุณาเลือกจังหวัด</Form.Control.Feedback>}
                             </Form.Group>
                         </Row>
 
@@ -264,7 +247,7 @@ function Register() {
                         </div>
                     </Form>
                 ) : (
-                    <Form noValidate validated={validated} onSubmit={handleSubmit} className='form-input d-flex flex-column justify-content-center animate__animated animate__zoomIn' >
+                    <Form onSubmit={handleSubmit(onSubmit)} className='form-input d-flex flex-column justify-content-center animate__animated animate__zoomIn'>
                         <Row className='mb-3'>
                             <Form.Group as={Col} md='11' controlId="validationCustomName" className="mt-3 mb-3 mx-auto" >
                                 <Form.Label>ชื่อ-นามสกุล*</Form.Label>
@@ -272,13 +255,10 @@ function Register() {
                                     required
                                     type="text"
                                     name="fullName"
-                                    value={formData.fullName}
-                                    onChange={handleChange}
                                     placeholder="กรุณากรอกชื่อ-นามสกุล"
+                                    {...register("fullName")}
                                 />
-                                <Form.Control.Feedback type="invalid" >
-                                    *กรุณากรอกชื่อ-นามสกุล
-                                </Form.Control.Feedback>
+                                {errors.fullName && <Form.Control.Feedback type="invalid">*กรุณากรอกชื่อ-นามสกุล</Form.Control.Feedback>}
                             </Form.Group>
 
                             <Form.Group as={Col} md='11' controlId="validationCustomEmail" className="mt-3 mb-3 mx-auto">
@@ -287,13 +267,10 @@ function Register() {
                                     required
                                     type="email"
                                     name="email"
-                                    value={formData.email}
-                                    onChange={handleChange}
                                     placeholder="กรุณากรอกอีเมล"
+                                    {...register("email")}
                                 />
-                                <Form.Control.Feedback type="invalid">
-                                    *กรุณากรอกอีเมล
-                                </Form.Control.Feedback>
+                                {errors.email && <Form.Control.Feedback type="invalid">*กรุณากรอกอีเมล</Form.Control.Feedback>}
                             </Form.Group>
 
                             <Form.Group as={Col} md='11' controlId="validationCustomPhone" className="mt-3 mb-3 mx-auto">
@@ -302,32 +279,28 @@ function Register() {
                                     required
                                     type="text"
                                     name="phoneNumber"
-                                    value={formData.phoneNumber}
-                                    onChange={handleChange}
                                     placeholder="กรุณากรอกเบอร์โทรศัพท์"
+                                    minLength={10}
+                                    {...register("phoneNumber")}
                                 />
-                                <Form.Control.Feedback type="invalid">
-                                    *กรุณากรอกหมายเลขโทรศัพท์
-                                </Form.Control.Feedback>
+                                {errors.phoneNumber && <Form.Control.Feedback type="invalid">*กรุณากรอกหมายเลขโทรศัพท์</Form.Control.Feedback>}
                             </Form.Group>
                         </Row>
 
-                        <Row className='mb-3' style={{ paddingLeft: '14px', paddingRight: '14px' }}>
+                        <Row className='mb-3' style={{ paddingLeft: '23px', paddingRight: '23px' }}>
                             <Form.Group as={Col} controlId="validationCustomGender" >
                                 <Form.Label>เพศ*</Form.Label>
-                                <Form.Select className='select' name="gender" value={formData.gender} onChange={handleChange} required >
+                                <Form.Select className='select' name="gender" required {...register("gender")}>
                                     <option value="">กรุณาเลือกเพศ</option>
                                     <option value="female">หญิง</option>
                                     <option value="male">ชาย</option>
                                 </Form.Select>
-                                <Form.Control.Feedback type="invalid">
-                                    *กรุณาเลือกเพศ
-                                </Form.Control.Feedback>
+                                {errors.gender && <Form.Control.Feedback type="invalid">*กรุณาเลือกเพศ</Form.Control.Feedback>}
                             </Form.Group>
 
                             <Form.Group as={Col} controlId="validationCustomCity">
                                 <Form.Label>จังหวัด*</Form.Label>
-                                <Form.Select className='select' name="city" value={formData.city} onChange={handleChange} required>
+                                <Form.Select className='select' name="city" required {...register("city")}>
                                     <option value="">กรุณาเลือกจังหวัด</option>
                                     <option value="กระบี่">กระบี่</option>
                                     <option value="กรุงเทพฯ">กรุงเทพมหานคร</option>
@@ -406,9 +379,7 @@ function Register() {
                                     <option value="อุทัยธานี">อุทัยธานี</option>
                                     <option value="อุบลราชธานี">อุบลราชธานี</option>
                                 </Form.Select>
-                                <Form.Control.Feedback type="invalid">
-                                    *กรุณาเลือกจังหวัด
-                                </Form.Control.Feedback>
+                                {errors.city && <Form.Control.Feedback type="invalid">*กรุณาเลือกจังหวัด</Form.Control.Feedback>}
                             </Form.Group>
                         </Row>
 
