@@ -2,13 +2,14 @@ import React, { useState } from 'react'
 import { Form, Button, Row, Col, Container } from 'react-bootstrap'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
+import emailjs from '@emailjs/browser'
 import './Form.css'
 import 'animate.css'
+import axios from 'axios';
 
 function Register() {
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const [showSignupForm, setShowSignupForm] = useState(true);
-    const { createTransport } = require('nodemailer');
     const navigate = useNavigate();
 
     const toggleForm = () => {
@@ -17,30 +18,47 @@ function Register() {
 
     const onSubmit = async (data) => {
         console.log(data);
-        reset();
-        // Send email
-        const transporter = nodemailer.createTransport({
-            service: 'gmail',
-            auth: {
-                user: 'pimployforwork@gmail.com',
-                pass: 'tangmo2545'
-            }
-        });
 
-        const mailOptions = {
-            from: 'pimployforwork@gmail.com',
-            to: data.email, // ใช้อีเมลที่ผู้ใช้กรอกข้อมูลไว้
-            subject: 'Subject of your email',
-            text: 'Body of your email'
+        const serviceId = 'service_dhma91y';
+        const templateId = 'template_sjsmono';
+        const publicKey = 'DfB3LkE-ArB0N_5Mc';
+
+        const emailData = {
+            service_id: serviceId,
+            template_id: templateId,
+            user_id: publicKey,
+            template_params: {
+                from_name: data.fullName,
+                from_email: data.email,
+                message: `
+                    ข้อมูลการลงทะเบียน:
+                    
+                    ชื่อ-นามสกุล: ${data.fullName}
+                    
+                    อีเมล: ${data.email}
+                    
+                    หมายเลขโทรศัพท์: ${data.phoneNumber}
+                    
+                    เพศ: ${data.gender}
+                    
+                    จังหวัด: ${data.city}
+                    
+                    ขอบคุณที่ลงทะเบียนกับเรา!
+                    
+                    ด้วยความเคารพ,
+                    Coway (Thailand) Co.,ltd
+                `
+            }
         };
 
         try {
-            await transporter.sendMail(mailOptions);
+            const res = await axios.post("https://api.emailjs.com/api/v1.0/email/send", emailData);
             console.log('Email sent successfully');
+            reset();
+            navigate('/success');
         } catch (error) {
             console.error('Error sending email:', error);
         }
-        navigate('/success');
     };
 
     const buttonStyle = {
@@ -76,7 +94,7 @@ function Register() {
                                     type="text"
                                     name="fullName"
                                     placeholder="กรุณากรอกชื่อ-นามสกุล"
-                                    {...register("fullName")}
+                                    {...register("fullName", {required: true})}
                                 />
                                 {errors.fullName && <Form.Control.Feedback type="invalid">*กรุณากรอกชื่อ-นามสกุล</Form.Control.Feedback>}
                             </Form.Group>
@@ -88,7 +106,7 @@ function Register() {
                                     type="email"
                                     name="email"
                                     placeholder="กรุณากรอกอีเมล"
-                                    {...register("email")}
+                                    {...register("email", {required: true})}
                                 />
                                 {errors.email && <Form.Control.Feedback type="invalid">*กรุณากรอกอีเมล</Form.Control.Feedback>}
                             </Form.Group>
@@ -101,7 +119,7 @@ function Register() {
                                     name="phoneNumber"
                                     placeholder="กรุณากรอกเบอร์โทรศัพท์"
                                     minLength={10}
-                                    {...register("phoneNumber")}
+                                    {...register("phoneNumber", {required: true})}
                                 />
                                 {errors.phoneNumber && <Form.Control.Feedback type="invalid">*กรุณากรอกหมายเลขโทรศัพท์</Form.Control.Feedback>}
                             </Form.Group>
@@ -115,7 +133,7 @@ function Register() {
                                     type="text"
                                     name="agentNumber"
                                     placeholder="กรุณากรอกหมายเลขตัวแทน"
-                                    {...register("agentNumber")}
+                                    {...register("agentNumber", {required: true})}
                                 />
                                 {errors.agentNumber && <Form.Control.Feedback type="invalid">*กรุณากรอกหมายเลขตัวแทน</Form.Control.Feedback>}
                             </Form.Group>
@@ -126,7 +144,7 @@ function Register() {
                                     type="text"
                                     name="affiliation"
                                     placeholder="กรุณากรอกสังกัด"
-                                    {...register("affiliation")}
+                                    {...register("affiliation", {required: true})}
                                 />
                                 {errors.affiliation && <Form.Control.Feedback type="invalid">*กรุณากรอกสังกัด</Form.Control.Feedback>}
                             </Form.Group>
@@ -137,8 +155,8 @@ function Register() {
                                 <Form.Label>เพศ*</Form.Label>
                                 <Form.Select className='select' name="gender" required {...register("gender")}>
                                     <option value="">กรุณาเลือกเพศ</option>
-                                    <option value="female">หญิง</option>
-                                    <option value="male">ชาย</option>
+                                    <option value="หญิง">หญิง</option>
+                                    <option value="ชาย">ชาย</option>
                                 </Form.Select>
                                 {errors.gender && <Form.Control.Feedback type="invalid">*กรุณาเลือกเพศ</Form.Control.Feedback>}
                             </Form.Group>
@@ -256,7 +274,7 @@ function Register() {
                                     type="text"
                                     name="fullName"
                                     placeholder="กรุณากรอกชื่อ-นามสกุล"
-                                    {...register("fullName")}
+                                    {...register("fullName", {required: true})}
                                 />
                                 {errors.fullName && <Form.Control.Feedback type="invalid">*กรุณากรอกชื่อ-นามสกุล</Form.Control.Feedback>}
                             </Form.Group>
@@ -268,7 +286,7 @@ function Register() {
                                     type="email"
                                     name="email"
                                     placeholder="กรุณากรอกอีเมล"
-                                    {...register("email")}
+                                    {...register("email", {required: true})}
                                 />
                                 {errors.email && <Form.Control.Feedback type="invalid">*กรุณากรอกอีเมล</Form.Control.Feedback>}
                             </Form.Group>
@@ -281,7 +299,7 @@ function Register() {
                                     name="phoneNumber"
                                     placeholder="กรุณากรอกเบอร์โทรศัพท์"
                                     minLength={10}
-                                    {...register("phoneNumber")}
+                                    {...register("phoneNumber", {required: true})}
                                 />
                                 {errors.phoneNumber && <Form.Control.Feedback type="invalid">*กรุณากรอกหมายเลขโทรศัพท์</Form.Control.Feedback>}
                             </Form.Group>
@@ -292,8 +310,8 @@ function Register() {
                                 <Form.Label>เพศ*</Form.Label>
                                 <Form.Select className='select' name="gender" required {...register("gender")}>
                                     <option value="">กรุณาเลือกเพศ</option>
-                                    <option value="female">หญิง</option>
-                                    <option value="male">ชาย</option>
+                                    <option value="หญิง">หญิง</option>
+                                    <option value="ชาย">ชาย</option>
                                 </Form.Select>
                                 {errors.gender && <Form.Control.Feedback type="invalid">*กรุณาเลือกเพศ</Form.Control.Feedback>}
                             </Form.Group>
