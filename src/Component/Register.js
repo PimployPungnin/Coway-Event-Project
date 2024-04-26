@@ -2,22 +2,56 @@ import React, { useState } from 'react'
 import { Form, Button, Row, Col, Container } from 'react-bootstrap'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
-import emailjs from '@emailjs/browser'
 import './Form.css'
 import 'animate.css'
-import axios from 'axios';
+import axios from 'axios'
 
 function Register() {
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const [showSignupForm, setShowSignupForm] = useState(true);
     const navigate = useNavigate();
+    const mongoose = require('mongoose');
 
+    // ประกาศ Schema
+    const registrationSchema = new mongoose.Schema({
+        fullName: String,
+        email: String,
+        phoneNumber: String,
+        agentNumber: String,
+        affiliation: String,
+        gender: String,
+        city: String
+    });
+
+    // ประกาศ Model จาก Schema
+    const Registration = mongoose.model('Registration', registrationSchema);
+
+    // สร้าง connection และเชื่อมต่อ MongoDB
+    const uri = 'mongodb://localhost:27017/Regisdata/DataForm';
+    mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+
+    const db = mongoose.connection;
+
+    db.on('error', console.error.bind(console, 'connection error:'));
+    db.once('open', function () {
+        console.log('Connected to MongoDB');
+    });
     const toggleForm = () => {
         setShowSignupForm(!showSignupForm);
     };
 
     const onSubmit = async (data) => {
         console.log(data);
+
+        const registration = new Registration({
+            fullName: data.fullName,
+            email: data.email,
+            phoneNumber: data.phoneNumber,
+            agentNumber: data.agentNumber,
+            affiliation: data.affiliation,
+            gender: data.gender,
+            city: data.city
+        })
 
         const serviceId = 'service_dhma91y';
         const templateId = 'template_sjsmono';
@@ -39,7 +73,7 @@ function Register() {
                     
                     หมายเลขโทรศัพท์: ${data.phoneNumber}
                     
-                    เพศ: ${data.gender}
+                    เพศ: ${data.gender}mongodb://localhost:27017/Regisdata/DataForm
                     
                     จังหวัด: ${data.city}
                     
@@ -52,12 +86,15 @@ function Register() {
         };
 
         try {
+            await registration.save();
+            console.log('Registration data saved to MongoDB successfully');
             const res = await axios.post("https://api.emailjs.com/api/v1.0/email/send", emailData);
             console.log('Email sent successfully');
             reset();
             navigate('/success');
         } catch (error) {
             console.error('Error sending email:', error);
+            console.error('Error saving registration data:', error);
         }
     };
 
@@ -94,7 +131,7 @@ function Register() {
                                     type="text"
                                     name="fullName"
                                     placeholder="กรุณากรอกชื่อ-นามสกุล"
-                                    {...register("fullName", {required: true})}
+                                    {...register("fullName", { required: true })}
                                 />
                                 {errors.fullName && <Form.Control.Feedback type="invalid">*กรุณากรอกชื่อ-นามสกุล</Form.Control.Feedback>}
                             </Form.Group>
@@ -106,7 +143,7 @@ function Register() {
                                     type="email"
                                     name="email"
                                     placeholder="กรุณากรอกอีเมล"
-                                    {...register("email", {required: true})}
+                                    {...register("email", { required: true })}
                                 />
                                 {errors.email && <Form.Control.Feedback type="invalid">*กรุณากรอกอีเมล</Form.Control.Feedback>}
                             </Form.Group>
@@ -119,7 +156,7 @@ function Register() {
                                     name="phoneNumber"
                                     placeholder="กรุณากรอกเบอร์โทรศัพท์"
                                     minLength={10}
-                                    {...register("phoneNumber", {required: true})}
+                                    {...register("phoneNumber", { required: true })}
                                 />
                                 {errors.phoneNumber && <Form.Control.Feedback type="invalid">*กรุณากรอกหมายเลขโทรศัพท์</Form.Control.Feedback>}
                             </Form.Group>
@@ -133,7 +170,7 @@ function Register() {
                                     type="text"
                                     name="agentNumber"
                                     placeholder="กรุณากรอกหมายเลขตัวแทน"
-                                    {...register("agentNumber", {required: true})}
+                                    {...register("agentNumber", { required: true })}
                                 />
                                 {errors.agentNumber && <Form.Control.Feedback type="invalid">*กรุณากรอกหมายเลขตัวแทน</Form.Control.Feedback>}
                             </Form.Group>
@@ -144,7 +181,7 @@ function Register() {
                                     type="text"
                                     name="affiliation"
                                     placeholder="กรุณากรอกสังกัด"
-                                    {...register("affiliation", {required: true})}
+                                    {...register("affiliation", { required: true })}
                                 />
                                 {errors.affiliation && <Form.Control.Feedback type="invalid">*กรุณากรอกสังกัด</Form.Control.Feedback>}
                             </Form.Group>
@@ -274,7 +311,7 @@ function Register() {
                                     type="text"
                                     name="fullName"
                                     placeholder="กรุณากรอกชื่อ-นามสกุล"
-                                    {...register("fullName", {required: true})}
+                                    {...register("fullName", { required: true })}
                                 />
                                 {errors.fullName && <Form.Control.Feedback type="invalid">*กรุณากรอกชื่อ-นามสกุล</Form.Control.Feedback>}
                             </Form.Group>
@@ -286,7 +323,7 @@ function Register() {
                                     type="email"
                                     name="email"
                                     placeholder="กรุณากรอกอีเมล"
-                                    {...register("email", {required: true})}
+                                    {...register("email", { required: true })}
                                 />
                                 {errors.email && <Form.Control.Feedback type="invalid">*กรุณากรอกอีเมล</Form.Control.Feedback>}
                             </Form.Group>
@@ -299,7 +336,7 @@ function Register() {
                                     name="phoneNumber"
                                     placeholder="กรุณากรอกเบอร์โทรศัพท์"
                                     minLength={10}
-                                    {...register("phoneNumber", {required: true})}
+                                    {...register("phoneNumber", { required: true })}
                                 />
                                 {errors.phoneNumber && <Form.Control.Feedback type="invalid">*กรุณากรอกหมายเลขโทรศัพท์</Form.Control.Feedback>}
                             </Form.Group>
