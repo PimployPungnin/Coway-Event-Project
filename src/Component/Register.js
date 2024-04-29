@@ -31,22 +31,27 @@ function Register() {
                 from_email: data.email,
                 message: `
                     ข้อมูลการลงทะเบียน:
-                    
+
                     ชื่อ-นามสกุล: ${data.fullName}
-                    
+
                     อีเมล: ${data.email}
-                    
+
                     หมายเลขโทรศัพท์: ${data.phoneNumber}
-                    
+
                     เพศ: ${data.gender}
-                    
+
                     จังหวัด: ${data.city}
+
+                    หมายเลขตัวแทน: ${data.agentNumber}
                     
+                    สังกัด: ${data.affiliation}
+
                     ขอบคุณที่ลงทะเบียนกับเรา!
-                    
+
                     ด้วยความเคารพ,
-                    Coway (Thailand) Co.,ltd
+                    Coway (Thailand) Co., Ltd
                 `
+
             }
         };
 
